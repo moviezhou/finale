@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+      <div class="col-sm-12">
+        <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+            <h3><span class="label label-success">题目序号</span></h3>
+            <input class="form-control" type=text size=30 name=title>
+            <h3><span class="label label-success">题目内容</span></h3>
+            <textarea class="form-control" rows="8" name=text></textarea>
+            <h3><span class="label label-success">答题类别</span></h3>
+            <select class="form-control" name="required">
+                <option value="T">必答</option>
+                <option value="F" selected="selected">选答</option>
+            </select>
+            <h3><span class="label label-success">题型</span></h3>
+            <select class="form-control" name="category">
+                <option value="A">社会现象分析类</option>
+                <option value="B">工作组织协调类</option>
+            </select>
+            <button type="submit" class="btn btn-danger">添加</button>
+        </form>
+      <ul class=list-inline>
+  {% for entry in entries %}
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              {{ entry.title }}
+              <span class="badge">{{ entry.category }}</span>
+          </div>
+          <div class="panel-body">
+              {{ entry.text|safe }}
+          </div>
+      </div>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+    </div>
+      <div class="col-sm-12 entries">
+
+      </div>
+  {% endif %}
+{% endblock %}

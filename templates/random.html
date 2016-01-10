@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=entries>
+  {% for entry in entries %}
+      <div class="panel panel-info">
+          <div class="panel-heading">
+              <h2 class="panel-title">{{ entry.title }}</h2>
+          </div>
+          <div class="question panel-body">
+              {{ entry.text|safe }}
+          </div>
+      </div>
+
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
+{% block timer %}
+    {% include "timer.html"  %}
+{% endblock %}
